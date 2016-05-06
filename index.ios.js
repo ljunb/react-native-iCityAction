@@ -3,14 +3,15 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
-import React, {Component} from 'react';
+import React from 'react';
 import {
     AppRegistry,
-    StyleSheet,
-    Text,
-    View
+    Component,
 } from 'react-native';
+
+import TabBarView from './app/tabbar';
+
+/*
 import Util from './app/common/util';
 import URLS from './app/common/service';
 
@@ -70,5 +71,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 });
+*/
 
-AppRegistry.registerComponent('iCityAction', () => iCityAction);
+
+AppRegistry.registerComponent('iCityAction', () => TabBarView);
