@@ -10,6 +10,9 @@ import {
     StyleSheet,
 } from 'react-native';
 
+import NavigationBar from './components/navigation';
+import News from './pages/news';
+
 export default class TabBarView extends Component {
 
     constructor(props) {
@@ -34,7 +37,7 @@ export default class TabBarView extends Component {
                         })
                     }}
                 >
-                    {this._renderContent('新闻')}
+                    <NavigationBar component={News} />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title='视频'
