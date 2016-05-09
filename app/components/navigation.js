@@ -9,17 +9,20 @@ import {
     Component,
     View,
     StyleSheet,
+    StatusBar,
 } from 'react-native';
 
 export default class NavigationBar extends Component {
     render() {
         return (
-            <Navigator
-                initialRoute={{name: '', component: this.props.component}}
-                configureScene={() => {
+            <View style={{flex: 1}}>
+                <StatusBar barStyle='light-content'/>
+                <Navigator
+                    initialRoute={{name: '', component: this.props.component}}
+                    configureScene={() => {
                         return Navigator.SceneConfigs.FloatFromBottom;
                     }}
-                renderScene={(route, navigator) => {
+                    renderScene={(route, navigator) => {
                         let Component = route.component;
                         return (
                             <View style={styles.container}>
@@ -27,7 +30,8 @@ export default class NavigationBar extends Component {
                             </View>
                         )
                     }}
-            />
+                />
+            </View>
         )
     }
 }

@@ -8,11 +8,14 @@ import {
     View,
     Text,
     ScrollView,
+    TouchableOpacity,
 } from 'react-native';
 
 import Header from '../components/header';
-import {NEWS_CATEGORIES_URL} from '../common/constants';
+import {NEWS_CATEGORIES_URL, NEWS_BANNER_URL} from '../common/constants';
 import HttpTool from '../common/util';
+import CategoryMenu from '../components/category_menu';
+import NewsList from '../components/news_list';
 
 export default class News extends Component {
 
@@ -21,7 +24,8 @@ export default class News extends Component {
 
         this.state = {
             newsCategories: [],
-            selectedCategoryIndex: 0,
+            bannerData: [],
+            newsList: [],
         }
     }
 
@@ -35,81 +39,49 @@ export default class News extends Component {
         HttpTool.get(NEWS_CATEGORIES_URL, (response) => {
 
             let categories = response.item_list;
-
             this.setState({
                 newsCategories: categories,
             });
-        }, (error) => {
 
+            // 请求第一个分类的轮播数据
+            this._fetchBannerData(this.state.newsCategories[0]);
+
+        }, (error) => {
+            
+        });
+    }
+
+    // 请求轮播数据
+    _fetchBannerData(category) {
+        
+        let bannerUrl = NEWS_BANNER_URL + '?sitecode=' + category.site_code + '&poscode=' + category.hot_pos_code;
+        
+        HttpTool.get(bannerUrl, (response) => {
+
+            let bannerDatas = response.item_list;
+            this.setState({
+                bannerData: bannerDatas,
+            })
+            
+        }, (error) => {
+            
         });
     }
 
     render() {
-
         return (
             <View>
                 <Header />
-                <ScrollView
-                    horizontal={true}
-                    automaticallyAdjustContentInsets={false}
-                    showsHorizontalScrollIndicator={false}
-                    bounces={false}
-                    style={styles.scrollView}
-                >
-                    {
-                        this.state.newsCategories.map((category, i) => {
-                            return (
-                                <CategoryItem key={i} index={i} category={category} />
-                            )
-                        })}
-                </ScrollView>
-            </View>
-        )
-    }
-
-}
-
-class CategoryItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: false,
-        }
-    }
-
-    render() {
-
-        let index = this.props.index;
-        let itemStyle = [styles.item];
-        let itemTitle = [styles.title];
-
-        if (index == 0) {
-            itemStyle.push({borderBottomWidth: 2, borderBottomColor: 'red'});
-            itemTitle.push({color: 'red'})
-        }
-
-        return (
-            <View style={itemStyle}>
-                <Text style={itemTitle}>{this.props.category.name}</Text>
+                <CategoryMenu
+                    categories={this.state.newsCategories}
+                    fetchBannerData={(category) => {
+                        this._fetchBannerData(category);
+                    }}
+                />
+                <NewsList 
+                    bannerDatas={this.state.bannerData}
+                />
             </View>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    scrollView: {
-        flex: 1,
-        height: 40,
-    },
-
-    item: {
-        height: 40,
-        paddingLeft: 10,
-        paddingRight: 10,
-        justifyContent: 'center',
-    },
-
-    title: {
-        fontSize: 14,
-    }
-})
