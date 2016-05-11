@@ -17,28 +17,41 @@ export default class NewsList extends Component {
 
     render() {
 
-        let {bannerDatas} = this.props;
+        let {bannerDatas, newsList} = this.props;
+
+        if (bannerDatas.length) {
+            return (
+                <Swiper>
+                    {bannerDatas.map((category, i) => {
+                        return (
+                            <View style={styles.bannerContainer} key={i}>
+                                <Image
+                                    style={styles.bannerImage}
+                                    source={{uri: category.image_list[0].src}}
+                                >
+                                    <View style={styles.bannerTitle}>
+                                        <Text style={styles.titleFont}>{category.title}</Text>
+                                    </View>
+                                </Image>
+                            </View>
+                        )
+                    })}
+                </Swiper>
+            )
+        }
 
         return (
-            <Swiper
-                style={styles.swiper}
-            >
-                {bannerDatas.map((category, i) => {
+            <View>
+                {newsList.map((category, i) => {
                     return (
-                        <View style={styles.bannerContainer}>
-                            <Image
-                                style={styles.bannerImage}
-                                source={{uri: category.image_list[0].src}}
-                            >
-                                <View style={styles.bannerTitle}>
-                                    <Text style={styles.titleFont}>{category.title}</Text>
-                                </View>
-                            </Image>
-                        </View>
+                        <Text key={i}>{category.title}</Text>
                     )
                 })}
-            </Swiper>
+            </View>
+
         )
+
+
     }
 }
 

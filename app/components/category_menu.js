@@ -56,8 +56,8 @@ export default class CategoryMenu extends Component {
         // 将选择的分类回传给news组件
         var category = this.props.categories[index];
 
-        if (this.props.fetchBannerData) {
-            this.props.fetchBannerData(category);
+        if (this.props.fetchNewsList) {
+            this.props.fetchNewsList(category);
         }
 
         // 更新菜单Item UI
