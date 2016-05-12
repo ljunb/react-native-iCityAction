@@ -20,7 +20,7 @@ export default class NavigationBar extends Component {
                 <Navigator
                     initialRoute={{name: '', component: this.props.component}}
                     configureScene={() => {
-                        return Navigator.SceneConfigs.FloatFromBottom;
+                        return Navigator.SceneConfigs.FloatFromRight;
                     }}
                     renderScene={(route, navigator) => {
                         let Component = route.component;

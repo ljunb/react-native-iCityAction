@@ -9,6 +9,7 @@ import {
     View,
     Image,
     Text,
+    TouchableOpacity,
 } from 'react-native';
 import Common from '../../common/Constants';
 
@@ -20,20 +21,22 @@ export default class MultiImageCell extends Component {
         let titleWidth = Common.window.width - 95 - Common.window.margin * 3;
 
         return (
-            <View style={styles.row}>
-                <Image
-                    style={Common.style.newsSingleImage}
-                    source={{uri: category.image_list[0].src}}
-                />
-                <View style={[styles.titleContainer, {width: titleWidth}]}>
-                    <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
-                    <Text style={styles.introFont} numberOfLines={2}>{category.intro}</Text>
+            <TouchableOpacity onPress={this.props.touchAction}>
+                <View style={styles.row}>
+                    <Image
+                        style={Common.style.newsSingleImage}
+                        source={{uri: category.image_list[0].src}}
+                    />
+                    <View style={[styles.titleContainer, {width: titleWidth}]}>
+                        <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
+                        <Text style={styles.introFont} numberOfLines={2}>{category.intro}</Text>
+                    </View>
+                    <View style={styles.pvContainer}>
+                        <Image style={Common.style.pvImage} source={{uri: 'commentsIcon'}}/>
+                        <Text style={styles.pvFont}>{category.pv}</Text>
+                    </View>
                 </View>
-                <View style={styles.pvContainer}>
-                    <Image style={Common.style.pvImage} source={{uri: 'commentsIcon'}}/>
-                    <Text style={styles.pvFont}>{category.pv}</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

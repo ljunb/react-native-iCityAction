@@ -9,11 +9,12 @@ import {
     View,
     Image,
     Text,
+    TouchableOpacity,
 } from 'react-native';
 import Common from '../../common/Constants';
 
 export default class MultiImageCell extends Component {
-    
+
     render() {
 
         let {category} = this.props;
@@ -22,26 +23,28 @@ export default class MultiImageCell extends Component {
         let imageWidth = (Common.window.width - (imageCount + 1) * margin) / imageCount;
 
         return (
-            <View style={styles.row}>
-                <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
-                <View style={styles.multiImageContainer}>
-                    {
-                        category.image_list.map((imageObj, i) => {
-                            return (
-                                <Image
-                                    key={i}
-                                    style={{height: 80, width: imageWidth}}
-                                    source={{uri: imageObj.src}}
-                                />
-                            )
-                        })
-                    }
+            <TouchableOpacity onPress={this.props.touchAction}>
+                <View style={styles.row}>
+                    <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
+                    <View style={styles.multiImageContainer}>
+                        {
+                            category.image_list.map((imageObj, i) => {
+                                return (
+                                    <Image
+                                        key={i}
+                                        style={{height: 80, width: imageWidth}}
+                                        source={{uri: imageObj.src}}
+                                    />
+                                )
+                            })
+                        }
+                    </View>
+                    <View style={styles.pvContainer}>
+                        <Image style={Common.style.pvImage} source={{uri: 'commentsIcon'}}/>
+                        <Text style={styles.pvFont}>{category.pv}</Text>
+                    </View>
                 </View>
-                <View style={styles.pvContainer}>
-                    <Image style={Common.style.pvImage} source={{uri: 'commentsIcon'}}/>
-                    <Text style={styles.pvFont}>{category.pv}</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 7.5
     },
-    
+
     pvFont: {
         color: 'gray',
         fontSize: 12,

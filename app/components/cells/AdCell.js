@@ -9,6 +9,7 @@ import {
     View,
     Image,
     Text,
+    TouchableOpacity,
 } from 'react-native';
 import Common from '../../common/Constants';
 
@@ -21,10 +22,12 @@ export default class AdCell extends Component {
         let imageStyle = {height: 150, width: imageWidth, marginTop: 5};
 
         return (
-            <View style={styles.row}>
-                <Text style={styles.titleFont}>{category.title}</Text>
-                <Image style={imageStyle} source={{uri: category.image_list[0].src}}/>
-            </View>
+            <TouchableOpacity onPress={this.props.touchAction}>
+                <View style={styles.row}>
+                    <Text style={styles.titleFont}>{category.title}</Text>
+                    <Image style={imageStyle} source={{uri: category.image_list[0].src}}/>
+                </View>
+            </TouchableOpacity>
         )
     }
 }
