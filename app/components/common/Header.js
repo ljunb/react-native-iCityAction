@@ -10,7 +10,7 @@ import {
     Text,
 } from 'react-native';
 
-import Common from '../common/constants';
+import Common from '../../common/Constants';
 
 export default class Header extends Component {
     render() {

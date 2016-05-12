@@ -9,6 +9,6 @@ import {
     Component,
 } from 'react-native';
 
-import TabBarView from './app/tabbar';
+import TabBarView from './app/Tabbar';
 
 AppRegistry.registerComponent('iCityAction', () => TabBarView);

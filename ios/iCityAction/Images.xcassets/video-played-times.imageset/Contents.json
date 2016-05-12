@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bottom-home-normal.png",
+      "filename" : "video-played-times.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bottom-home-normal@2x.png",
+      "filename" : "video-played-times@2x.png",
       "scale" : "2x"
     },
     {

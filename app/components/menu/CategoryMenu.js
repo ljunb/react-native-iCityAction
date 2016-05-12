@@ -10,8 +10,7 @@ import {
     View,
 } from 'react-native';
 
-import CategoryItem from '../components/category_item';
-import ss from 'react-native-swiper';
+import CategoryItem from '../menu/CategoryItem';
 
 export default class CategoryMenu extends Component {
 
@@ -71,6 +70,8 @@ const styles = StyleSheet.create({
     scrollView: {
         flex: 1,
         height: 40,
+        borderBottomWidth: 0.5,
+        borderBottomColor: 'rgba(131, 131, 131, 0.4)',
     },
 
 })

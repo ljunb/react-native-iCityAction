@@ -1,9 +1,9 @@
 /**
  * Created by ljunb on 16/5/6.
  */
-import {
-    Dimensions,
-} from 'react-native';
+
+import { Dimensions } from 'react-native';
+
 
 // 屏幕布局相关
 let window = {
@@ -16,11 +16,14 @@ let window = {
     margin: 10,
 }
 
-let color = {
-    /*
-     *  APP主题颜色
-     * */
+// 颜色
+let colors = {
     theme_color: 'rgb(217, 51, 58)',
+}
+
+let styles = {
+    pvImage: {width: 15, height: 10},
+    newsSingleImage: {height: 70, width: 95},
 }
 
 // 请求接口
@@ -55,5 +58,6 @@ let urls = {
 export default Common = {
     window: window,
     urls: urls,
-    color: color,
+    color: colors,
+    style: styles,
 }

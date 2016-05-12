@@ -11,12 +11,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import Header from '../components/header';
-import Common from '../common/constants';
-import HttpTool from '../common/util';
-import CategoryMenu from '../components/category_menu';
-import NewsList from '../components/news_list';
-import LoadingView from '../common/loading';
+import Header from '../components/common/Header';
+import Common from '../common/Constants';
+import HttpTool from '../common/Util';
+import CategoryMenu from '../components/menu/CategoryMenu';
+import NewsList from '../components/lists/NewsList';
+import LoadingView from '../common/Loading';
 
 export default class News extends Component {
 
@@ -59,6 +59,8 @@ export default class News extends Component {
 
         // 拼接新闻列表URL
         let listURL = Common.urls.news_list + '?sitecode=' + category.site_code + '&poscode=' + category.pos_code + '&catcode=' + category.code + '&older_than=&newer_than=&limit=20';
+
+        console.log(listURL);
 
         HttpTool.get(listURL, (response) => {
 
