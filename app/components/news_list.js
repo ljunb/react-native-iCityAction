@@ -3,7 +3,6 @@
  * 新闻列表
  */
 import React from 'react';
-import Swiper from 'react-native-swiper';
 import {
     Component,
     StyleSheet,
@@ -11,70 +10,127 @@ import {
     View,
     Text,
     TouchableOpacity,
+    ListView,
+    ScrollView,
 } from 'react-native';
+
+import Common from '../common/constants';
 
 export default class NewsList extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 != row2,
+            }),
+        }
+    }
+
+    componentDidMount() {
+        let {newsList} = this.props;
+
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(newsList),
+        })
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        let {newsList} = nextProps;
+
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(newsList),
+        })
+    }
+
     render() {
 
-        let {bannerDatas, newsList} = this.props;
+        return (
+            <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this._renderNewsList}
+                style={{height: Common.window.news_listView_height}}
+            />
+        )
+    }
 
-        if (bannerDatas.length) {
+    _renderNewsList(category) {
+
+        let imageCount = category.image_count;
+        let titleWidth = Common.window.width - 90 - Common.window.margin * 3;
+
+        if (imageCount > 1) {
+
+            let margin = Common.window.margin;
+            let imageWidth = (Common.window.width - (imageCount + 1) * margin) / imageCount;
+
             return (
-                <Swiper>
-                    {bannerDatas.map((category, i) => {
-                        return (
-                            <View style={styles.bannerContainer} key={i}>
-                                <Image
-                                    style={styles.bannerImage}
-                                    source={{uri: category.image_list[0].src}}
-                                >
-                                    <View style={styles.bannerTitle}>
-                                        <Text style={styles.titleFont}>{category.title}</Text>
-                                    </View>
-                                </Image>
-                            </View>
-                        )
-                    })}
-                </Swiper>
+                <View style={styles.row}>
+                    <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
+                    <View style={styles.multiImageContainer}>
+                        {
+                            category.image_list.map((imageObj, i) => {
+                                return (
+                                    <Image
+                                        key={i}
+                                        style={{height: 80, width: imageWidth}}
+                                        source={{uri: imageObj.src}}
+                                    />
+                                )
+                            })
+                        }
+                    </View>
+                </View>
             )
         }
 
         return (
-            <View>
-                {newsList.map((category, i) => {
-                    return (
-                        <Text key={i}>{category.title}</Text>
-                    )
-                })}
+            <View style={[styles.rowDirection, styles.row]}>
+                <Image
+                    style={styles.singleImage}
+                    source={{uri: category.image_list[0].src}}
+                />
+                <View style={[styles.titleContainer, {width: titleWidth}]}>
+                    <Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
+                </View>
             </View>
-
         )
-
-
     }
 }
 
 const styles = StyleSheet.create({
-    bannerContainer: {
-        height: 160,
+    row: {
+        paddingTop: Common.window.margin,
+        paddingBottom: Common.window.margin,
+        marginLeft: Common.window.margin,
+        marginRight: Common.window.margin,
+        borderBottomWidth: 0.5,
+        borderBottomColor: 'rgba(131, 131, 131, 0.6)'
     },
 
-    bannerImage: {
-        flex: 1,
-        justifyContent: 'flex-end',
+    rowDirection: {
+        flexDirection: 'row',
     },
 
-    bannerTitle: {
-        backgroundColor: 'rgba(131, 131, 131, 0.3)',
-        height: 40,
-        justifyContent: 'center',
+    singleImage: {
+        height: 70,
+        width: 90,
+    },
+
+    titleContainer: {
+        marginLeft: Common.window.margin,
     },
 
     titleFont: {
-        fontSize: 16,
         fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'center',
+        fontSize: 16,
+    },
+
+    multiImageContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 7.5
     }
 })

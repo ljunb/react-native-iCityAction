@@ -10,7 +10,7 @@ import {
     Text,
 } from 'react-native';
 
-import { THEME_COLOR } from '../common/constants';
+import Common from '../common/constants';
 
 export default class Header extends Component {
     render() {
@@ -27,7 +27,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     header: {
         height: 64,
-        backgroundColor: THEME_COLOR,
+        backgroundColor: Common.color.theme_color,
     },
 
     titleContainer: {

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import CategoryItem from '../components/category_item';
+import ss from 'react-native-swiper';
 
 export default class CategoryMenu extends Component {
 
@@ -21,7 +22,6 @@ export default class CategoryMenu extends Component {
             selectedCategoryIndex: 0,
         }
     }
-    
     
     render() {
         
