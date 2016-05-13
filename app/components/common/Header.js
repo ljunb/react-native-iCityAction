@@ -26,7 +26,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     header: {
-        height: 64,
+        height: Common.window.navigation_height,
         backgroundColor: Common.color.theme_color,
     },
 

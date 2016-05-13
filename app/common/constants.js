@@ -49,10 +49,32 @@ let urls = {
      *  sitecode=100    (site_code)
      *  poscode=10001   (pos_code)
      *  catcode=0       (code)
+     *  older_than      (请求更多时参数,新闻数据order字段)
      *  
      *  eg: http://app.lndspd.com/api_v31/rest/infos?sitecode=100&poscode=10001&catcode=0&older_than=&newer_than=&limit=20
      * */
-    news_list: 'http://app.lndspd.com/api_v31/rest/infos'
+    news_list: 'http://app.lndspd.com/api_v31/rest/infos',
+
+    /*
+     *  新闻信息
+     *  参数:
+     *
+     *  556956583125319680 (新闻id)
+     *  permalink (新闻内容HTML)
+     *
+     *  eg: http://app.lndspd.com/api_v31/rest/infos/556956583125319680
+     * */
+    news_info: 'http://app.lndspd.com/api_v31/rest/infos/',
+
+    /*
+     *  新闻评论
+     *  参数:
+     *
+     *  556956583125319680 (新闻id)
+     *  permalink (新闻内容HTML)
+     *
+     *  eg: http://app.lndspd.com/api_v31/rest/infos/556956583125319680/comments?sort=recent&older_than=&newer_than=&limit=20
+     * */
 }
 
 export default Common = {

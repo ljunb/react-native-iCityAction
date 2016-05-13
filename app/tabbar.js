@@ -9,16 +9,16 @@ import {
     Text,
     StyleSheet,
 } from 'react-native';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavigationBar from './components/common/Navigation';
 import News from './pages/News';
 
 const tabBarItems = [
-    {title: '首页', icon: 'bottom-home-normal', selectedIcon: 'bottom-home-active', component: News},
-    {title: '视频', icon: 'bottom-video-normal', selectedIcon: 'bottom-video-active', component: News},
-    {title: '互动', icon: 'bottom-tv-normal', selectedIcon: 'bottom-tv-active', component: News},
-    {title: '社区', icon: 'bottom-bbs-normal', selectedIcon: 'bottom-bbs-active', component: News},
-    {title: '我的', icon: 'bottom-user-normal', selectedIcon: 'bottom-user-active', component: News},
+    {title: '首页', icon: 'home', component: News},
+    {title: '视频', icon: 'play-circle-o', component: News},
+    {title: '互动', icon: 'tv', component: News},
+    {title: '社区', icon: 'comments-o', component: News},
+    {title: '我的', icon: 'user', component: News},
 ]
 
 export default class TabBarView extends Component {
@@ -37,12 +37,12 @@ export default class TabBarView extends Component {
                 {
                     tabBarItems.map((controller, i) => {
                         return (
-                            <TabBarIOS.Item
+                            <FontAwesome.TabBarItem
                                 key={i}
                                 title={controller.title}
                                 selected={this.state.selectedTab === controller.title}
-                                icon={{uri: controller.icon, scale: 2}}
-                                selectedIcon={{uri: controller.selectedIcon, scale: 2}}
+                                iconName={controller.icon}
+                                selectedIconName={controller.icon}
                                 onPress={() => {
                                     this.setState({
                                        selectedTab: controller.title
@@ -50,7 +50,7 @@ export default class TabBarView extends Component {
                                 }}
                             >
                                 <NavigationBar component={controller.component}/>
-                            </TabBarIOS.Item>
+                            </FontAwesome.TabBarItem>
                         )
                     })
                 }

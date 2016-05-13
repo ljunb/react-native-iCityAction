@@ -30,6 +30,7 @@ export default class News extends Component {
         super(props);
         
         this._renderNewsList = this._renderNewsList.bind(this);
+        this._fetchMoreNews = this._fetchMoreNews.bind(this)
 
         this.state = {
             newsCategories: null,
@@ -89,8 +90,12 @@ export default class News extends Component {
         })
     }
 
+    _fetchMoreNews() {
+        
+    }
+
     render() {
-        let Content = [<Header key={100}/>];
+        let Content = [<Header key={100} />];
 
         if (!this.state.isLoadedCategory) {
             Content.push(<LoadingView key={200}/>)
@@ -114,6 +119,8 @@ export default class News extends Component {
                     key={400}
                     dataSource={this.state.dataSource}
                     renderRow={this._renderNewsList}
+                    onEndReached={this._fetchMoreNews.bind(this)}
+                    onEndReachedThreshold={90}
                     style={{height: Common.window.news_listView_height}}
                     refreshControl={
                             <RefreshControl

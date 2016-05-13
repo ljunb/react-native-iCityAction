@@ -9,20 +9,49 @@ import {
     View,
     Text,
     TouchableOpacity,
+    WebView,
 } from 'react-native';
+import DetailHeader from '../components/common/DetailHeader';
+import Common from '../common/Constants';
 
 export default class NewsDetail extends Component {
+    constructor(props) {
+        super(props);
+        this._backAction = this._backAction.bind(this);
+        this._moreAction = this._moreAction.bind(this);
+    }
+    
     render() {
-        return (
-            <TouchableOpacity
-                style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
-                onPress={() => {
-                    this.props.navigator.pop();
-                }}
-            >
-                    <Text>点我返回</Text>
 
-            </TouchableOpacity>
+        return (
+            <View >
+                <DetailHeader
+                    backAction={this._backAction.bind(this)}
+                    moreAction={this._moreAction.bind(this)}
+                />
+                <WebView
+                    source={{uri: this.props.category.permalink}}
+                    startInLoadingState={true}
+                    domStorageEnabled={true}
+                    javaScriptEnabled={true}
+                    style={styles.webView}
+                />
+            </View>
         )
     }
+
+    _backAction() {
+        this.props.navigator.pop();
+    }
+
+    _moreAction() {
+        alert('刷新+分享')
+    }
 }
+
+const styles = StyleSheet.create({
+    webView: {
+        width: Common.window.width,
+        height:Common.window.height - Common.window.navigation_height - Common.window.tabBar_height
+    }
+})
