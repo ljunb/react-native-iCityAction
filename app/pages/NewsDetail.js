@@ -10,8 +10,10 @@ import {
     Text,
     TouchableOpacity,
     WebView,
+    ScrollView,
 } from 'react-native';
-import DetailHeader from '../components/common/DetailHeader';
+
+import Header from '../components/common/Header';
 import Common from '../common/Constants';
 
 export default class NewsDetail extends Component {
@@ -20,22 +22,29 @@ export default class NewsDetail extends Component {
         this._backAction = this._backAction.bind(this);
         this._moreAction = this._moreAction.bind(this);
     }
-    
+
     render() {
 
         return (
             <View >
-                <DetailHeader
-                    backAction={this._backAction.bind(this)}
-                    moreAction={this._moreAction.bind(this)}
-                />
-                <WebView
-                    source={{uri: this.props.category.permalink}}
-                    startInLoadingState={true}
-                    domStorageEnabled={true}
-                    javaScriptEnabled={true}
-                    style={styles.webView}
-                />
+                <ScrollView >
+                    <Header
+                        title="都市频道"
+                        leftIcon="ios-arrow-back"
+                        leftIconAction={this._backAction}
+                        rightIcon="ios-more"
+                        rightIconAction={this._moreAction}
+                    />
+
+                    <WebView
+                        source={{uri: this.props.category.permalink}}
+                        startInLoadingState={true}
+                        domStorageEnabled={true}
+                        javaScriptEnabled={true}
+                        style={styles.webView}
+                    />
+                    <View style={{height: 100, flex: 1, backgroundColor: 'red'}}></View>
+                </ScrollView>
             </View>
         )
     }
@@ -52,6 +61,6 @@ export default class NewsDetail extends Component {
 const styles = StyleSheet.create({
     webView: {
         width: Common.window.width,
-        height:Common.window.height - Common.window.navigation_height - Common.window.tabBar_height
+        height: Common.window.height - Common.window.navigation_height - Common.window.tabBar_height
     }
 })

@@ -6,7 +6,7 @@
 import React from 'react';
 import {
     ProgressBarAndroid,
-    ProgressViewIOS,
+    ActivityIndicatorIOS,
     Platform,
     Component,
     StyleSheet,
@@ -28,7 +28,7 @@ export default class LoadingView extends Component {
         }
         return (
             <View style={styles.loading}>
-                <ProgressViewIOS />
+                <ActivityIndicatorIOS />
                 <Text style={styles.loadingText}>Loading...</Text>
             </View>
         )

@@ -12,13 +12,17 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavigationBar from './components/common/Navigation';
 import News from './pages/News';
+import Video from './pages/Video';
+import Live from './pages/Live';
+import Community from './pages/Community';
+import User from './pages/User';
 
 const tabBarItems = [
     {title: '首页', icon: 'home', component: News},
-    {title: '视频', icon: 'play-circle-o', component: News},
-    {title: '互动', icon: 'tv', component: News},
-    {title: '社区', icon: 'comments-o', component: News},
-    {title: '我的', icon: 'user', component: News},
+    {title: '视频', icon: 'play-circle-o', component: Video},
+    {title: '互动', icon: 'tv', component: Live},
+    {title: '社区', icon: 'comments-o', component: Community},
+    {title: '我的', icon: 'user', component: User},
 ]
 
 export default class TabBarView extends Component {
@@ -49,7 +53,7 @@ export default class TabBarView extends Component {
                                     })
                                 }}
                             >
-                                <NavigationBar component={controller.component}/>
+                                <NavigationBar component={controller.component} />
                             </FontAwesome.TabBarItem>
                         )
                     })

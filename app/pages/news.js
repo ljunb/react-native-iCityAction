@@ -13,7 +13,6 @@ import {
     ListView,
     RefreshControl,
 } from 'react-native';
-
 import HttpTool from '../common/Util';
 import Common from '../common/Constants';
 import Header from '../components/common/Header';
@@ -95,7 +94,14 @@ export default class News extends Component {
     }
 
     render() {
-        let Content = [<Header key={100} />];
+        let Content = [
+            <Header 
+                key={100} 
+                title="都市频道" 
+                rightIcon="ios-search"
+                rightIconAction={this._searchAction}
+            />
+        ];
 
         if (!this.state.isLoadedCategory) {
             Content.push(<LoadingView key={200}/>)
@@ -163,5 +169,9 @@ export default class News extends Component {
                 category: category,
             }
         })
+    }
+    
+    _searchAction() {
+        alert('search')
     }
 }

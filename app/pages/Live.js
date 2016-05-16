@@ -1,6 +1,6 @@
 /**
  * Created by ljunb on 16/5/16.
- * 视频页
+ * 互动页
  */
 import React from 'react';
 import {
@@ -9,14 +9,17 @@ import {
     View,
     Text,
 } from 'react-native';
-
 import Header from '../components/common/Header';
 
 export default class News extends Component {
 
     render() {
         return (
-            <Header title="视频"/>
+            <Header title="互动" leftIcon="ios-qr-scanner" leftIconAction={this._scannerAction}/>
         )
+    }
+
+    _scannerAction() {
+        alert('scanner')
     }
 }

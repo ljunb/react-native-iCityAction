@@ -1,6 +1,6 @@
 /**
  * Created by ljunb on 16/5/16.
- * 视频页
+ * 个人详情页
  */
 import React from 'react';
 import {
@@ -16,7 +16,7 @@ export default class News extends Component {
 
     render() {
         return (
-            <Header title="视频"/>
+            <Header title="个人信息"/>
         )
     }
 }
