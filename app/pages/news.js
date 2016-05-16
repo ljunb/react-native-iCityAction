@@ -108,8 +108,9 @@ export default class News extends Component {
                         this.setState({
                             currentCategory: category,
                             isRefreshing: true,
+                        },  function() {
+                            this._fetchNewsList();
                         });
-                        this._fetchNewsList();
                     }}
                 />
             )
