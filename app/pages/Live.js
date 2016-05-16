@@ -15,7 +15,7 @@ export default class News extends Component {
 
     render() {
         return (
-            <Header title="互动" leftIcon="ios-qr-scanner" leftIconAction={this._scannerAction}/>
+            <Header title="互动" leftIcon="ios-qr-scanner" leftTouchAction={this._scannerAction}/>
         )
     }
 

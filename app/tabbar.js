@@ -10,7 +10,6 @@ import {
     StyleSheet,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import NavigationBar from './components/common/Navigation';
 import News from './pages/News';
 import Video from './pages/Video';
 import Live from './pages/Live';
@@ -40,6 +39,9 @@ export default class TabBarView extends Component {
             <TabBarIOS tintColor='red'>
                 {
                     tabBarItems.map((controller, i) => {
+
+                        let Component = controller.component;
+
                         return (
                             <FontAwesome.TabBarItem
                                 key={i}
@@ -53,7 +55,7 @@ export default class TabBarView extends Component {
                                     })
                                 }}
                             >
-                                <NavigationBar component={controller.component} />
+                                <Component navigator={this.props.navigator}/>
                             </FontAwesome.TabBarItem>
                         )
                     })

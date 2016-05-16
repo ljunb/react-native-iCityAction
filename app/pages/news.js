@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     ListView,
     RefreshControl,
+    InteractionManager
 } from 'react-native';
 import HttpTool from '../common/Util';
 import Common from '../common/Constants';
@@ -22,6 +23,7 @@ import MultiImageCell from '../components/cells/MultiImageCell';
 import SingleImageCell from '../components/cells/SingleImageCell';
 import AdCell from '../components/cells/AdCell';
 import NewsDetail from '../pages/NewsDetail';
+import Search from '../pages/Search';
 
 export default class News extends Component {
 
@@ -29,7 +31,8 @@ export default class News extends Component {
         super(props);
         
         this._renderNewsList = this._renderNewsList.bind(this);
-        this._fetchMoreNews = this._fetchMoreNews.bind(this)
+        this._fetchMoreNews = this._fetchMoreNews.bind(this);
+        this._searchAction = this._searchAction.bind(this);
 
         this.state = {
             newsCategories: null,
@@ -96,19 +99,19 @@ export default class News extends Component {
     render() {
         let Content = [
             <Header 
-                key={100} 
+                key={'header'}
                 title="都市频道" 
                 rightIcon="ios-search"
-                rightIconAction={this._searchAction}
+                rightTouchAction={this._searchAction.bind(this)}
             />
         ];
 
         if (!this.state.isLoadedCategory) {
-            Content.push(<LoadingView key={200}/>)
+            Content.push(<LoadingView key={'loading'}/>)
         } else {
             Content.push(
                 <CategoryMenu
-                    key={300}
+                    key={'category_menu'}
                     categories={this.state.newsCategories}
                     fetchNewsList={(category) => {
                         this.setState({
@@ -123,7 +126,7 @@ export default class News extends Component {
 
             Content.push(
                 <ListView
-                    key={400}
+                    key={'listView'}
                     dataSource={this.state.dataSource}
                     renderRow={this._renderNewsList}
                     onEndReached={this._fetchMoreNews.bind(this)}
@@ -163,15 +166,21 @@ export default class News extends Component {
     }
     
     _pushToDetailPage(category) {
-        this.props.navigator.push({
-            component: NewsDetail,
-            passProps:{
-                category: category,
-            }
-        })
+        InteractionManager.runAfterInteractions(() => {
+            this.props.navigator.push({
+                component: NewsDetail,
+                passProps:{
+                    category: category,
+                }
+            })
+        });
     }
-    
+
     _searchAction() {
-        alert('search')
+        InteractionManager.runAfterInteractions(() => {
+            this.props.navigator.push({
+                component: Search,
+            })
+        });
     }
 }
