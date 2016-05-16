@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         width: Common.window.width,
         borderTopWidth: 0.5,
         borderTopColor: '#ccc',
+        backgroundColor: 'rgb(246, 246, 246)'
     },
 
     editComment: {
