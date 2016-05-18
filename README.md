@@ -1,19 +1,20 @@
-### iCityAction
-
+## iCityAction
 iCityAction是基于React-Native实现的新闻类APP，接口数据来自《都市频道》，持续更新中。
-目前只针对iOS端，完成的功能（只添加下拉刷新，暂未添加上拉加载更多功能，仍有许多隐藏bug，努力修复中）：
->* 首页展示、新闻详情、评论列表
->* 搜索、搜索结果
->* 视频列表
+## 完成功能
+目前只针对iOS端，仍有许多隐藏bug，努力修复中：
+>* 首页展示（下拉刷新，未添加上拉加载更多）
+>* 新闻详情，可push至评论列表（未实现收藏、点赞新闻）
+>* 搜索（未添加搜索记录），搜索结果（暂未添加下拉刷新、下拉加载更多）
+>* 视频列表（下拉刷新），视频详情（采用组件已实现视频，暂未抓取视频评论接口）
 
-### 运行截图
+## 运行截图
 ![首页](https://github.com/ljunb/react-native-iCityAction/blob/master/screenshot/main.png)
 ![新闻详情](https://github.com/ljunb/react-native-iCityAction/blob/master/screenshot/detail.png)
 ![搜索](https://github.com/ljunb/react-native-iCityAction/blob/master/screenshot/search.png)
 ![搜索结果](https://github.com/ljunb/react-native-iCityAction/blob/master/screenshot/search_result.png)
 ![视频列表](https://github.com/ljunb/react-native-iCityAction/blob/master/screenshot/video.png)
 
-## Dependency
+## 相关依赖
 ```
 "dependencies": {
 "react": "^0.14.8",
