@@ -25,12 +25,13 @@ export default class SearchBar extends Component {
                 <Icon name="ios-search" size={15} color="gray"/>
                 <TextInput
                     style={styles.textInput}
+                    value={this.props.value}
                     placeholder={this.props.placeholder}
-                    onChangeText={(text)=>{
-                        if (this.props.getKeywords) {
-                            this.props.getKeywords(text);
-                        }
-                    }}
+                    onSubmitEditing={this.props.onSubmitEditing}
+                    returnKeyType='search'
+                    enablesReturnKeyAutomatically={true}
+                    onChangeText={this.props.onChangeText}
+                    onBlur={this.props.onBlur}
                 />
             </View>
         )

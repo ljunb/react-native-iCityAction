@@ -23,7 +23,7 @@ import MultiImageCell from '../../components/cells/MultiImageCell';
 import SingleImageCell from '../../components/cells/SingleImageCell';
 import AdCell from '../../components/cells/AdCell';
 import NewsDetail from '../../pages/News/NewsDetail';
-import Search from '../Search';
+import Search from '../../pages/News/Search';
 
 export default class News extends Component {
 
@@ -138,7 +138,7 @@ export default class News extends Component {
                                 onRefresh={this._fetchNewsList()}
                                 title='Refresh...'
                             />
-                        }
+                    }
                 />
             )
         }
