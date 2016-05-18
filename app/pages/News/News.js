@@ -14,16 +14,16 @@ import {
     RefreshControl,
     InteractionManager
 } from 'react-native';
-import HttpTool from '../common/Util';
-import Common from '../common/Constants';
-import Header from '../components/common/Header';
-import CategoryMenu from '../components/menu/CategoryMenu';
-import LoadingView from '../common/Loading';
-import MultiImageCell from '../components/cells/MultiImageCell';
-import SingleImageCell from '../components/cells/SingleImageCell';
-import AdCell from '../components/cells/AdCell';
-import NewsDetail from '../pages/NewsDetail';
-import Search from '../pages/Search';
+import HttpTool from '../../common/Util';
+import Common from '../../common/Constants';
+import Header from '../../components/common/Header';
+import CategoryMenu from '../../components/menu/CategoryMenu';
+import LoadingView from '../../components/common/Loading';
+import MultiImageCell from '../../components/cells/MultiImageCell';
+import SingleImageCell from '../../components/cells/SingleImageCell';
+import AdCell from '../../components/cells/AdCell';
+import NewsDetail from '../../pages/News/NewsDetail';
+import Search from '../Search';
 
 export default class News extends Component {
 

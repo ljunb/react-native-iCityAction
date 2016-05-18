@@ -75,6 +75,43 @@ let urls = {
      *
      *  eg: http://app.lndspd.com/api_v31/rest/infos/556956583125319680/comments?sort=recent&older_than=&newer_than=&limit=20
      * */
+
+    /*
+    *  搜索推荐关键词
+    * */
+    hot_keywords: 'http://app.lndspd.com/api_v31/rest/search/suggestions?limit=',
+
+    /*
+     *  搜索
+     *  参数:
+     *
+     *  q (关键词)
+     *
+     *  eg: http://app.lndspd.com/api_v31/rest/search/info?q=%E5%81%A5%E5%BA%B7&start=0&limit=20
+     * */
+    search: 'http://app.lndspd.com/api_v31/rest/search/info',
+
+    /*
+    *  视频分类
+    * */
+    video_categories: 'http://app.lndspd.com/api_v31/rest/categories/video',
+
+    /*
+    *  视频列表
+    *  *  参数:
+    *  sitecode=100    (site_code)
+    *  poscode=10001   (pos_code)
+    *  catcode=0       (code)
+    *  older_than      (请求更多时参数,新闻数据order字段)
+    *
+    *  eg: http://app.lndspd.com/api_v31/rest/infos/video?sitecode=100&poscode=10004&catcode=0&older_than=&newer_than=&limit=20
+    * */
+    video_list: 'http://app.lndspd.com/api_v31/rest/infos/video',
+
+    /*
+    *  社区内页
+    * */
+    community: 'http://app.lndspd.com/api_v31/bbs/index.jsp'
 }
 
 export default Common = {

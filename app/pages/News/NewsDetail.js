@@ -11,16 +11,21 @@ import {
     TouchableOpacity,
     WebView,
     ScrollView,
+    InteractionManager
 } from 'react-native';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Header from '../components/common/Header';
-import Common from '../common/Constants';
-import CommentToolBar from '../components/common/CommentToolBar';
+import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
+import Header from '../../components/common/Header';
+import Common from '../../common/Constants';
+import CommentToolBar from '../../components/common/CommentToolBar';
+import NewsComments from '../../pages/News/NewsComments';
 
 export default class NewsDetail extends Component {
     constructor(props) {
         super(props);
+
+        this._fetchCommentsList = this._fetchCommentsList.bind(this);
+
         this.state = {
             showMore: false,
         }
@@ -28,7 +33,7 @@ export default class NewsDetail extends Component {
 
     render() {
 
-        let { category } = this.props;
+        let {category} = this.props;
 
         return (
             <View style={{flex: 1}}>
@@ -43,8 +48,6 @@ export default class NewsDetail extends Component {
                     ref="webView"
                     source={{uri: category.permalink}}
                     startInLoadingState={true}
-                    domStorageEnabled={true}
-                    javaScriptEnabled={true}
                     style={styles.webView}
                 />
                 {this.state.showMore ? this._renderMoreView() : null}
@@ -53,9 +56,36 @@ export default class NewsDetail extends Component {
                     comment={category.comment}
                     like={category.like}
                     star={category.star}
+                    editCommentsAction={this._editComments}
+                    commentAction={this._fetchCommentsList.bind(this, category)}
+                    starAction={this._starNews}
+                    likeAction={this._likeNews}
                 />
             </View>
         )
+    }
+
+    _editComments() {
+        alert('editComments')
+    }
+
+    _fetchCommentsList(category) {
+        InteractionManager.runAfterInteractions(() => {
+            this.props.navigator.push({
+                component: NewsComments,
+                passProps: {
+                    id: category.id
+                }
+            })
+        });
+    }
+
+    _starNews() {
+        alert('_starNews')
+    }
+
+    _likeNews() {
+        alert('_like')
     }
 
     _renderMoreView() {
@@ -64,11 +94,11 @@ export default class NewsDetail extends Component {
                 <TouchableOpacity
                     style={[styles.moreViewItem, styles.bottomLine]}
                     onPress={()=>{
-                        alert('刷新')
+                        alert('如何重新加载WebView?')
                         this.setState({showMore: false})
                     }}
                 >
-                    <FontAwesome name="refresh" size={22} color="white" />
+                    <FontAwesome name="refresh" size={22} color="white"/>
                     <Text style={styles.itemFont}>刷新</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -78,7 +108,7 @@ export default class NewsDetail extends Component {
                         this.setState({showMore: false})
                     }}
                 >
-                    <FontAwesome name="share" size={22} color="white" />
+                    <FontAwesome name="share" size={22} color="white"/>
                     <Text style={styles.itemFont}>分享</Text>
                 </TouchableOpacity>
             </View>

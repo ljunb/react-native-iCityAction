@@ -11,15 +11,32 @@ import {
     StyleSheet,
     View,
     Text,
+    WebView,
 } from 'react-native';
 
 import Header from '../components/common/Header';
+import Common from '../common/Constants';
 
 export default class News extends Component {
 
     render() {
         return (
-            <Header title="社区"/>
+            <View>
+                <Header title="社区"/>
+                <WebView
+                    automaticallyAdjustContentInsets={false}
+                    source={{uri: Common.urls.community}}
+                    startInLoadingState={true}
+                    style={styles.webView}
+                />
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    webView: {
+        width: Common.window.width,
+        height: Common.window.height - Common.window.navigation_height
+    },
+});

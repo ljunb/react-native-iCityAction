@@ -20,19 +20,31 @@ export default class CommentToolBar extends Component {
 
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={[styles.editComment, styles.rightLine]}>
+                <TouchableOpacity
+                    style={[styles.editComment, styles.rightLine]}
+                    onPress={this.props.editCommentsAction}
+                >
                     <Icon name="edit" size={18} color="gray"/>
                     <Text style={styles.commentsInfoFont}>写评论</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.editComment}>
+                <TouchableOpacity
+                    style={styles.editComment}
+                    onPress={this.props.commentAction}
+                >
                     <Icon name="commenting-o" size={18} color="gray"/>
                     <Text style={styles.commentsInfoFont}>{comment}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.editComment}>
+                <TouchableOpacity
+                    style={styles.editComment}
+                    onPress={this.props.starAction}
+                >
                     <Icon name="star-o" size={18} color="gray"/>
                     <Text style={styles.commentsInfoFont}>{star}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.editComment}>
+                <TouchableOpacity
+                    style={styles.editComment}
+                    onPress={this.props.likeAction}
+                >
                     <Icon name="heart-o" size={18} color="gray"/>
                     <Text style={styles.commentsInfoFont}>{like}</Text>
                 </TouchableOpacity>

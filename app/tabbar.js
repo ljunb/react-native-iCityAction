@@ -10,8 +10,8 @@ import {
     StyleSheet,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import News from './pages/News';
-import Video from './pages/Video';
+import News from './pages/News/News';
+import Video from './pages/Video/Video';
 import Live from './pages/Live';
 import Community from './pages/Community';
 import User from './pages/User';
