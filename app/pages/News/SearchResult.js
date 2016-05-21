@@ -18,7 +18,7 @@ import {
 import Header from '../../components/common/Header';
 import SearchBar from '../../components/common/SearchBar';
 import HTTPTool from '../../common/Utils';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import Loading from '../../components/common/Loading';
 import NewsDetail from '../../pages/News/NewsDetail';
 import MultiImageCell from '../../components/cells/MultiImageCell';

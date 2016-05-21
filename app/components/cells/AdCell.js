@@ -11,7 +11,7 @@ import {
     Text,
     TouchableOpacity,
 } from 'react-native';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 
 export default class AdCell extends Component {
 

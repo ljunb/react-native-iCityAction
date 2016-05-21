@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 
 export default class CommentToolBar extends Component {
     render() {

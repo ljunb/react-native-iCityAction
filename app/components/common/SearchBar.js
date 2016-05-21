@@ -8,7 +8,7 @@ import {
     TextInput,
     View,
 } from 'react-native';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class SearchBar extends Component {

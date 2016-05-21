@@ -16,7 +16,7 @@ import {
 
 import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import CommentToolBar from '../../components/common/CommentToolBar';
 import NewsComments from '../../pages/News/NewsComments';
 

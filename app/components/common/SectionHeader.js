@@ -9,7 +9,7 @@ import {
     Text,
 } from 'react-native';
 
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 
 export default class SectionHeader extends Component {
     render() {

@@ -12,7 +12,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import Video from 'react-native-video';
 
 export default class VideoCell extends Component {

@@ -14,7 +14,7 @@ import {
 import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
 import HTTPTool from '../../common/Utils';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import Loading from '../../components/common/Loading';
 
 export default class NewsComments extends Component {

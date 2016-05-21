@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import Header from '../components/common/Header';
-import Common from '../common/Constants';
+import Common from '../common/AppConstants';
 
 export default class News extends Component {
 

@@ -15,7 +15,7 @@ import {
     InteractionManager
 } from 'react-native';
 import HttpTool from '../../common/Utils';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import Header from '../../components/common/Header';
 import CategoryMenu from '../../components/menu/CategoryMenu';
 import LoadingView from '../../components/common/Loading';

@@ -15,7 +15,7 @@ import {
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 import CommentToolBar from '../../components/common/CommentToolBar';
 import Video from 'react-native-video';
 import SectionHeader from '../../components/common/SectionHeader';

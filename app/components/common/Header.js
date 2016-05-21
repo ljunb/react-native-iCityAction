@@ -12,7 +12,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Common from '../../common/Constants';
+import Common from '../../common/AppConstants';
 
 export default class Header extends Component {
 
