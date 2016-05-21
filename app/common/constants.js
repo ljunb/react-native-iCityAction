@@ -72,8 +72,8 @@ let urls = {
      *
      *  556956583125319680 (新闻id)
      *  permalink (新闻内容HTML)
-     *
-     *  eg: http://app.lndspd.com/api_v31/rest/infos/556956583125319680/comments?sort=recent&older_than=&newer_than=&limit=20
+     *  
+     *  eg: http://app.lndspd.com/api_v31/rest/infos/553757080549326850/comments?sort=recent&older_than=&newer_than=&limit=20
      * */
 
     /*

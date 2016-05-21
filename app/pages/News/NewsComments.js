@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
-import HTTPTool from '../../common/Util';
+import HTTPTool from '../../common/Utils';
 import Common from '../../common/Constants';
 import Loading from '../../components/common/Loading';
 
@@ -36,9 +36,7 @@ export default class NewsComments extends Component {
 
     _fetchCommentsList() {
 
-        // let url = Common.urls.news_info + this.props.id + '/comments?sort=recent&older_than=&newer_than=&limit=20';
-
-        let url = 'http://app.lndspd.com/api_v31/rest/infos/556956583125319680/comments?sort=recent&older_than=&newer_than=&limit=20';
+        let url = Common.urls.news_info + this.props.id + '/comments?sort=recent&older_than=&newer_than=&limit=20';
 
         HTTPTool.get(url, (response) => {
             let comments = response.item_list;
@@ -49,7 +47,8 @@ export default class NewsComments extends Component {
             })
 
         }, (error) => {
-            alert('_fetchCommentsList: ' + error);
+            console.log('_fetchCommentsList: ' + error);
+            this.setState({loaded: true});
         });
     }
 

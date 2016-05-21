@@ -13,21 +13,50 @@ import {
     ListView,
 } from 'react-native';
 
-import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
 import Common from '../../common/Constants';
 import CommentToolBar from '../../components/common/CommentToolBar';
 import Video from 'react-native-video';
 import SectionHeader from '../../components/common/SectionHeader';
+import HTTPTool from '../../common/Utils';
 
 export default class VideoDetail extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 != row2,
+            })
+        }
+    }
 
     componentDidMount() {
         this._fetchComments();
     }
 
     _fetchComments() {
+        
+//http://app.lndspd.com/api_v31/rest/infos/553757080549326850/comments?sort=recent&older_than=&newer_than=&limit=20
+//http://app.lndspd.com/api_v31/rest/infos/553757080549326848/comments?sort=recent&older_than=&newer_than=&limit=20
+        let url = Common.urls.news_info + this.props.id + '/comments?sort=recent&older_than=&newer_than=&limit=20';
 
+        HTTPTool.get(url, (response) => {
+            let comments = response.item_list;
+
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(comments),
+                loaded: true,
+            })
+
+            alert(comments)
+
+        }, (error) => {
+            console.log('_fetchCommentsList: ' + error);
+            this.setState({loaded: true});
+        });
     }
 
     render() {
@@ -50,11 +79,15 @@ export default class VideoDetail extends Component {
                        paused={false}
                        resizeMode="cover"
                        repeat={true}
-                       style={{height: 200, width: Common.window.width}} />
+                       style={{height: 200, width: Common.window.width}}/>
                 <SectionHeader title="最新评论"/>
-                <View
-                    style={styles.listView}
-                />
+                {this.state.loaded ?
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={this._renderRow}
+                        style={styles.listView}
+                    /> : null
+                }
                 <CommentToolBar
                     style={styles.toolBar}
                     comment={category.comment}
@@ -62,6 +95,12 @@ export default class VideoDetail extends Component {
                     star={category.star}
                 />
             </View>
+        )
+    }
+
+    _renderRow(comments) {
+        return (
+            <Text style={{height: 40, width: Common.window.width}}>{comments.comment}</Text>
         )
     }
 

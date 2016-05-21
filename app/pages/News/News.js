@@ -14,7 +14,7 @@ import {
     RefreshControl,
     InteractionManager
 } from 'react-native';
-import HttpTool from '../../common/Util';
+import HttpTool from '../../common/Utils';
 import Common from '../../common/Constants';
 import Header from '../../components/common/Header';
 import CategoryMenu from '../../components/menu/CategoryMenu';
@@ -31,17 +31,19 @@ export default class News extends Component {
         super(props);
         
         this._renderNewsList = this._renderNewsList.bind(this);
-        this._fetchMoreNews = this._fetchMoreNews.bind(this);
         this._searchAction = this._searchAction.bind(this);
+        this._fetchMoreNews = this._fetchMoreNews.bind(this);
 
         this.state = {
             newsCategories: null,
+            currentCategory: null,
             isLoadedCategory: false,
             isRefreshing: true,
-            currentCategory: null,
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 != row2,
             }),
+            lastNews: null,
+            newsList: null,
         }
     }
 
@@ -60,12 +62,13 @@ export default class News extends Component {
                 newsCategories: categories,
                 isLoadedCategory: true,
                 currentCategory: categories[0]
+            }, function () {
+
+                this._fetchNewsList();
             });
-
-            this._fetchNewsList();
-
+            
         }, (error) => {
-            alert('_fetchNewsCategories: ' + error)
+            console.log('_fetchNewsCategories: ' + error)
         });
     }
 
@@ -84,16 +87,38 @@ export default class News extends Component {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(newsList),
                 isRefreshing: false,
+                lastNews: newsList[newsList.length-1],
+                newsList: newsList,
             })
 
         }, (error) => {
-
-            alert('_fetchNewsList: ' + error)
+            console.log('_fetchNewsList: ' + error)
         })
     }
 
     _fetchMoreNews() {
-        
+
+        let lastNews = this.state.lastNews;
+        let currentCategory = this.state.currentCategory;
+
+        let moreURL = Common.urls.news_list + '?sitecode=' + currentCategory.site_code + '&poscode=' + currentCategory.pos_code + '&catcode=' + currentCategory.code + '&older_than=' + lastNews.order + '&newer_than=&limit=20';
+
+        HttpTool.get(moreURL, (response) => {
+
+            let newsList = response.item_list;
+            let moreList = this.state.newsList.concat(newsList);
+
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(moreList),
+                isRefreshing: false,
+                lastNews: newsList[newsList.length-1],
+                newsList: moreList,
+            });
+
+        }, (error) => {
+            console.log('_fetchMoreNews: ' + error)
+        });
+
     }
 
     render() {
@@ -144,7 +169,7 @@ export default class News extends Component {
         }
 
         return (
-            <View>
+            <View style={{overflow: 'hidden'}}>
                 {Content}
             </View>
         )

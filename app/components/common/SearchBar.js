@@ -26,12 +26,9 @@ export default class SearchBar extends Component {
                 <TextInput
                     style={styles.textInput}
                     value={this.props.value}
-                    placeholder={this.props.placeholder}
-                    onSubmitEditing={this.props.onSubmitEditing}
-                    returnKeyType='search'
                     enablesReturnKeyAutomatically={true}
-                    onChangeText={this.props.onChangeText}
-                    onBlur={this.props.onBlur}
+                    returnKeyType='search'
+                    {...this.props}
                 />
             </View>
         )

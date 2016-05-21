@@ -9,7 +9,7 @@ import {
     StatusBar,
     View,
 } from 'react-native';
-import TabBarView from './TabBar';
+import TabBarView from './TabBarView';
 
 export default class Root extends Component {
     render() {

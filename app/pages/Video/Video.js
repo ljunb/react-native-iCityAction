@@ -15,7 +15,7 @@ import {
     InteractionManager
 } from 'react-native';
 
-import HttpTool from '../../common/Util';
+import HttpTool from '../../common/Utils';
 import Common from '../../common/Constants';
 import Header from '../../components/common/Header';
 import CategoryMenu from '../../components/menu/CategoryMenu';
@@ -57,8 +57,10 @@ export default class Video extends Component {
                 videoCategories: categories,
                 isLoadedCategory: true,
                 currentCategory: categories[0]
+            }, function () {
+                this._fetchVideoList();
             });
-            this._fetchVideoList();
+
 
         }, (error) => {
             alert('_fetchVideoCategories: ' + error)
@@ -70,6 +72,7 @@ export default class Video extends Component {
 
         let category = this.state.currentCategory;
 
+// 已知问题: 后台返回的数据有id字段,当转为json时,将id进行了四舍五入,导致id出错,无法获取视频评论数据
         // 拼接新闻列表URL
         let listURL = Common.urls.video_list + '?sitecode=' + category.site_code + '&poscode=' + category.pos_code + '&catcode=' + category.code + '&older_than=&newer_than=&limit=20';
 
@@ -140,18 +143,19 @@ export default class Video extends Component {
     }
 
     _renderVideoList(category) {
-
         return (
             <VideoCell category={category} touchAction={this._pushToDetailPage.bind(this, category)}/>
         )
     }
 
     _pushToDetailPage(category) {
+        
         InteractionManager.runAfterInteractions(() => {
             this.props.navigator.push({
                 component: VideoDetail,
                 passProps: {
                     category: category,
+                    id: category.id,
                 }
             })
         });
