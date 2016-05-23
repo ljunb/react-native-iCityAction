@@ -29,7 +29,7 @@ export default class News extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this._renderNewsList = this._renderNewsList.bind(this);
         this._searchAction = this._searchAction.bind(this);
         this._fetchMoreNews = this._fetchMoreNews.bind(this);
@@ -40,7 +40,7 @@ export default class News extends Component {
             isLoadedCategory: false,
             isRefreshing: true,
             dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 != row2,
+                rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             lastNews: null,
             newsList: null,
@@ -49,7 +49,9 @@ export default class News extends Component {
 
     componentDidMount() {
         // 请求所有新闻分类名称
-        this._fetchNewsCategories();
+        InteractionManager.runAfterInteractions(() => {
+            this._fetchNewsCategories();
+        });
     }
 
     // 获取所有新闻分类
@@ -66,7 +68,7 @@ export default class News extends Component {
 
                 this._fetchNewsList();
             });
-            
+
         }, (error) => {
             console.log('_fetchNewsCategories: ' + error)
         });
@@ -87,7 +89,7 @@ export default class News extends Component {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(newsList),
                 isRefreshing: false,
-                lastNews: newsList[newsList.length-1],
+                lastNews: newsList[newsList.length - 1],
                 newsList: newsList,
             })
 
@@ -111,7 +113,7 @@ export default class News extends Component {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(moreList),
                 isRefreshing: false,
-                lastNews: newsList[newsList.length-1],
+                lastNews: newsList[newsList.length - 1],
                 newsList: moreList,
             });
 
@@ -123,9 +125,9 @@ export default class News extends Component {
 
     render() {
         let Content = [
-            <Header 
+            <Header
                 key={'header'}
-                title="都市频道" 
+                title="都市频道"
                 rightIcon="ios-search"
                 rightTouchAction={this._searchAction.bind(this)}
             />
@@ -181,20 +183,20 @@ export default class News extends Component {
 
         if (category.type === 'news') {
             return (
-                imageCount > 1 ? 
+                imageCount > 1 ?
                     <MultiImageCell category={category} touchAction={this._pushToDetailPage.bind(this, category)}/>
                     : <SingleImageCell category={category} touchAction={this._pushToDetailPage.bind(this, category)}/>
             )
         }
-            
+
         return (<AdCell category={category} touchAction={this._pushToDetailPage.bind(this, category)}/>)
     }
-    
+
     _pushToDetailPage(category) {
         InteractionManager.runAfterInteractions(() => {
             this.props.navigator.push({
                 component: NewsDetail,
-                passProps:{
+                passProps: {
                     category: category,
                 }
             })

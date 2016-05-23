@@ -11,7 +11,9 @@ import {
     TouchableOpacity,
     WebView,
     ScrollView,
-    InteractionManager
+    InteractionManager,
+    ActivityIndicatorIOS,
+    Image,
 } from 'react-native';
 
 import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
@@ -28,7 +30,20 @@ export default class NewsDetail extends Component {
 
         this.state = {
             showMore: false,
+            loaded: false,
         }
+    }
+
+    _renderLoading() {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicatorIOS />
+                <Image
+                    source={{uri: 'loading-logo'}}
+                    style={styles.loadingLogo}
+                />
+            </View>
+        )
     }
 
     render() {
@@ -48,6 +63,7 @@ export default class NewsDetail extends Component {
                     ref="webView"
                     source={{uri: category.permalink}}
                     startInLoadingState={true}
+                    renderLoading={this._renderLoading}
                     style={styles.webView}
                 />
                 {this.state.showMore ? this._renderMoreView() : null}
@@ -153,5 +169,17 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: 'white',
         fontSize: 16,
+    },
+
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    loadingLogo: {
+        height: 20,
+        width: 100,
+        marginTop: 5,
     }
 })

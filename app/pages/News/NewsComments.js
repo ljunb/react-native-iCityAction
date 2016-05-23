@@ -9,7 +9,8 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    InteractionManager,
 } from 'react-native';
 import FontAwesome from '../../../node_modules/react-native-vector-icons/FontAwesome';
 import Header from '../../components/common/Header';
@@ -31,7 +32,9 @@ export default class NewsComments extends Component {
     }
 
     componentDidMount() {
-        this._fetchCommentsList();
+        InteractionManager.runAfterInteractions(() => {
+            this._fetchCommentsList();
+        });
     }
 
     _fetchCommentsList() {
